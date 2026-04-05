@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios'
-import { TokenResponse, CandidateProfile, Skill, Experience, Project, CV } from '@/types'
+import { TokenResponse, CandidateProfile, Skill, Experience, Project, CV, CandidateAnalytics } from '@/types'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
 
@@ -228,6 +228,17 @@ class ApiClient {
 
   async deleteJobInvitation(invitationId: number) {
     const response = await this.client.delete(`/api/recruiter/invitations/${invitationId}`)
+    return response.data
+  }
+
+  // Analytics endpoints
+  async trackProfileView(profileSlug: string): Promise<{ message: string }> {
+    const response = await this.client.post(`/api/analytics/track-view/${profileSlug}`)
+    return response.data
+  }
+
+  async getMyAnalytics(): Promise<CandidateAnalytics> {
+    const response = await this.client.get('/api/analytics/my-stats')
     return response.data
   }
 }

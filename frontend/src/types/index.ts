@@ -109,3 +109,11 @@ export interface CandidateSearchResult {
   avatar_url?: string
   skills: string[]
 }
+
+// Analytics types
+export interface CandidateAnalytics {
+  total_views: number
+  total_invitations: number
+  recent_views: number
+  recent_invitations: number
+}

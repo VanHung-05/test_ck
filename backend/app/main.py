@@ -1,7 +1,7 @@
 """FastAPI application factory"""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.api import auth, candidate, recruiter
+from app.api import auth, candidate, recruiter, analytics
 from app.db.database import Base, engine
 
 # Create tables
@@ -27,6 +27,7 @@ app.add_middleware(
 app.include_router(auth.router)
 app.include_router(candidate.router)
 app.include_router(recruiter.router)
+app.include_router(analytics.router)
 
 
 @app.get("/health")

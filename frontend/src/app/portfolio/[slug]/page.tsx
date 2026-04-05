@@ -18,6 +18,14 @@ export default function PublicPortfolioPage() {
         const data = await apiClient.getPublicProfile(slug)
         setProfile(data)
         setError(null)
+
+        // Track profile view
+        try {
+          await apiClient.trackProfileView(slug)
+        } catch (trackError) {
+          // Silently fail if tracking fails
+          console.error('Failed to track view:', trackError)
+        }
       } catch (err) {
         setError('Không tìm thấy portfolio')
       } finally {
